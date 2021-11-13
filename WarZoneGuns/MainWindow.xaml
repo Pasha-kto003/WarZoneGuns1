@@ -1,0 +1,48 @@
+﻿<Window x:Class="WarZoneGuns.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WarZoneGuns"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Список открываемого оружия из WarZone" Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
+        <ListView Grid.Row="1" Grid.RowSpan="2" ItemsSource="{Binding Guns}" SelectedItem="{Binding SelectedGun}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="id" DisplayMemberBinding="{Binding id}"/>
+                    <GridViewColumn Header="Название оружия" DisplayMemberBinding="{Binding name}"/>
+                    <GridViewColumn Header="Урон оружия" DisplayMemberBinding="{Binding damage}"/>
+                    <GridViewColumn Header="Дальность выстрела" DisplayMemberBinding="{Binding range}"/>
+                    <GridViewColumn Header="Маневренность" DisplayMemberBinding="{Binding movement}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding SelectedGun}">
+            <TextBlock Text="Название"/>
+            <TextBox Text="{Binding name}"/>
+            <TextBlock Text="Урон"/>
+            <TextBox Text="{Binding damage}"/>
+            <TextBlock Text="Дальность"/>
+            <TextBox Text="{Binding range}"/>
+            <TextBlock Text="Маневренность"/>
+            <TextBox Text="{Binding movement}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <Button Content="Добавить оружие" Command="{Binding AddGun}"/>
+                <Button Content="Добавить/Изменить" Command="{Binding EditGun}"/>
+                <Button Content="Удалить" Command="{Binding DeleteGun}"/>
+        </StackPanel>
+    </Grid>
+</Window>
